@@ -79,6 +79,49 @@ class Authentication extends Component {
             </div>
         );
     }
+
+    handleChange = (e) => {
+        let newState = {
+            [e.target.name]: e.target.value
+        }
+        this.setState(newState);
+    };
+
+    handleKeyPress = (e) => {
+        const { mode } = this.props;
+        switch (e.charCode) {
+            case 13:
+                if (mode) {
+                    this.handleLogin();
+                } else {
+                    this.handleRegister();
+                }
+            default:
+                break;
+        }
+    };
+
+    handleLogin = () => {
+        const { onLogin } = this.props;
+
+        const { username, password } = this.state;
+        onLogin(username, password).then((success) => {
+            if (!success) {
+                this.setState({ password: '' });
+            }
+        });
+    };
+
+    handleRegister = () => {
+        const { username, password } = this.state;
+        const { onRegister } = this.props;
+
+        onRegister(username, password).then((success) => {
+            if (!success) {
+                this.setState({ password: '' });
+            }
+        });
+    };
 }
 
 Authentication.propTypes = {

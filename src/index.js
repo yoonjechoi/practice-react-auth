@@ -8,12 +8,14 @@ import { createStore, applyMiddleware } from 'redux';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger'
+
 import { Provider } from 'react-redux'
 
 import { BrowserRouter as Router, Route, Link, IndexRoute } from 'react-router-dom';
 import { Login } from './containers';
 
-const store = createStore(reducers, applyMiddleware(thunk))
+const store = createStore(reducers, applyMiddleware(logger, thunk))
 
 ReactDOM.render(
     <Provider store={store}>
