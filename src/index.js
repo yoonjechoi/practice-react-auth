@@ -13,7 +13,7 @@ import logger from 'redux-logger'
 import { Provider } from 'react-redux'
 
 import { BrowserRouter as Router, Route, Link, IndexRoute } from 'react-router-dom';
-import { Login, Register } from './containers';
+import { Login, Register, Home } from './containers';
 
 const store = createStore(reducers, applyMiddleware(logger, thunk))
 
@@ -22,13 +22,15 @@ ReactDOM.render(
         <Router>
             <div>
                 <ul>
-                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/">Init</Link></li>
+                    <li><Link to="/home">Home</Link></li>
                     <li><Link to="/login">Login</Link></li>
                     <li><Link to="/register">Register</Link></li>
                 </ul>
 
                 <hr />
                 <Route exec path="/" component={App} />
+                <Route path="/home" component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
 

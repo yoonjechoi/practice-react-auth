@@ -92,6 +92,6 @@ export function registerSuccess() {
 export function registerFailure(error) {
     return {
         type: AUTH_REGISTER_FAILURE,
-        error: error,
+        error,
     };
 }
