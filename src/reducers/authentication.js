@@ -44,7 +44,30 @@ export default function authentication(state = initialState, action) {
                     status: { $set: 'FAILURE' }
                 }
             });
-            
+
+        case types.AUTH_REGISTER:
+            return update(state, {
+                register: {
+                    status: { $set: "WAITING" },
+                    error: { $set: -1 }
+                }
+            });
+
+        case types.AUTH_REGISTER_SUCCESS:
+            return update(state, {
+                register: {
+                    status: { $set: "SUCCESS" },
+                }
+            });
+
+        case types.AUTH_REGISTER_FAILURE:
+            return update(state, {
+                register: {
+                    status: { $set: "FAILURE" },
+                    error: { $set: action.errror }
+                }
+            });
+
         default:
             return state
     }

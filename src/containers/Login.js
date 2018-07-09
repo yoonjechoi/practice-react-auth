@@ -37,7 +37,6 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <h1>Hello, Login</h1>
                 <Authentication mode={true} onLogin={this.handleLogin} />
             </div>
         );

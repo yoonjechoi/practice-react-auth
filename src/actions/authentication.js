@@ -37,8 +37,8 @@ export function loginRequest(username, password) {
         dispatch(login());
 
         const data = {
-            client_id: "3fd7IctD72gMax0KicX3vFm5RxBPaZwzcTDzIaZw",
-            client_secret: "p6rAOtrdz1pYAw1lrJYor1Q1TfqDcJgeOIsIJQasVSM1waUhr37oDPzXuKsHpu9i0spM6U7aVKAnIacItPSmO5heezgp37vDzn4PJN5GT9ga1WZWOIwBqivrucs8zDKS",
+            client_id: "AbATJX3V319a2Jd09BWfPTj7wiUAZTNX6DEGZROW",
+            client_secret: "9QtVJ6CcKb8zi4TfObBxWoy79ewobNwOFqZ1nKVuNSba6wyAIIK3epaqJNJ3N4ljD6Pg9jvcWevA58EkSKRH1TN7gZqzmejc3KXW2Do7z4JV103XdXDHgQf8Z2YSfDrT",
             grant_type: "password",
             username,
             password
@@ -52,4 +52,44 @@ export function loginRequest(username, password) {
                 dispatch(loginFailure());
             });
     }
+}
+
+/* REGISTER */
+
+export function register() {
+    return {
+        type: AUTH_REGISTER
+    };
+}
+
+export function registerRequest(username, passsword) {
+    return (dispatch) => {
+        //Inform register API is starting
+        dispatch(retgister());
+
+        const data = {
+            username,
+            password,
+        };
+        return axios.post('http://localhost:8000/accounts/signup', data)
+            .then((response) => {
+                dispatch(registerSuccess());
+                return response.data;
+            }).catch((error) => {
+                dispatch(registerFailure(error.response.data))
+            });
+    };
+}
+
+export function registerSuccess() {
+    return {
+        type: AUTH_REGISTER_SUCCESS,
+    };
+}
+
+export function registerFailure(error) {
+    return {
+        type: AUTH_REGISTER_FAILURE,
+        error: error,
+    };
 }
