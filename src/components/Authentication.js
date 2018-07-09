@@ -10,6 +10,7 @@ class Authentication extends Component {
         this.state = {
             username: "",
             password: "",
+            email: "",
         }
     }
 
@@ -61,7 +62,36 @@ class Authentication extends Component {
         const registerView = (
             <div className="card-content">
                 <div className="row">
-                    {inputBoxes}
+                    <div className="input-field col s12 username">
+                        <label>Username</label>
+                        <input
+                            name="username"
+                            type="text"
+                            className="validate"
+                            value={this.state.username}
+                            onChange={this.handleChange} />
+                    </div>
+
+                    <div className="input-field col s12">
+                        <label>Email</label>
+                        <input
+                            name="email"
+                            type="email"
+                            className="validate"
+                            value={this.state.email}
+                            onChange={this.handleChange} />
+                    </div>
+
+                    <div className="input-field col s12">
+                        <label>Password</label>
+                        <input
+                            name="password"
+                            type="password"
+                            className="validate"
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            onKeyPress={this.handleKeyPress} />
+                    </div>
                     <a onClick={this.handleRegister} className="waves-effect waves-light btn">CREATE</a>
                 </div>
             </div>
@@ -113,10 +143,10 @@ class Authentication extends Component {
     };
 
     handleRegister = () => {
-        const { username, password } = this.state;
+        const { username, email, password } = this.state;
         const { onRegister } = this.props;
 
-        onRegister(username, password).then((success) => {
+        onRegister(username, email, password).then((success) => {
             if (!success) {
                 this.setState({ password: '' });
             }
@@ -133,7 +163,7 @@ Authentication.propTypes = {
 Authentication.defaultProps = {
     mode: true,
     onLogin: (id, pw) => console.error("onLogin is not defined."),
-    onRegister: (id, pw) => console.error("onRegister is not defined.")
+    onRegister: (id, email, pw) => console.error("onRegister is not defined.")
 
 }
 

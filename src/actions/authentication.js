@@ -62,16 +62,18 @@ export function register() {
     };
 }
 
-export function registerRequest(username, passsword) {
+export function registerRequest(username, email, password) {
     return (dispatch) => {
         //Inform register API is starting
-        dispatch(retgister());
+        dispatch(register());
 
         const data = {
             username,
+            email,
             password,
         };
-        return axios.post('http://localhost:8000/accounts/signup', data)
+
+        return axios.post('http://localhost:8000/accounts/register/', data)
             .then((response) => {
                 dispatch(registerSuccess());
                 return response.data;
