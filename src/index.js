@@ -5,7 +5,6 @@ import './index.css';
 import reducers from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger'
@@ -13,7 +12,7 @@ import logger from 'redux-logger'
 import { Provider } from 'react-redux'
 
 import { BrowserRouter as Router, Route, Link, IndexRoute } from 'react-router-dom';
-import { Login, Register, Home } from './containers';
+import { App, Login, Register, Home } from './containers';
 
 const store = createStore(reducers, applyMiddleware(logger, thunk))
 
@@ -22,7 +21,7 @@ ReactDOM.render(
         <Router>
             <div>
                 <ul>
-                    <li><Link to="/">Init</Link></li>
+                    <li><Link to="/">App</Link></li>
                     <li><Link to="/home">Home</Link></li>
                     <li><Link to="/login">Login</Link></li>
                     <li><Link to="/register">Register</Link></li>

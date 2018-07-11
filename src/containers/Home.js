@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Materialize from 'materialize-css';
+import $ from 'jquery';
+
 import { memoPostRequest, memoListRequest } from '../actions/memo';
 import { Write, MemoList } from '../components';
 
@@ -49,6 +52,34 @@ class Home extends Component {
             </div>
         )
     }
+
+    handlePost = (contents) => {
+        const { memoPostRequest } = this.props;
+        return memoPostRequest(contents).then(
+            () => {
+                const { postStatus } = this.props;
+                if (postStatus.status === "SUCCESS") {
+                    this.loadNewMemo().then(
+                        () => {
+                            Materialize.toast("Success!", 2000);
+                        }
+                    );
+                } else {
+                    /*
+                        ERROR CODES
+                            1: NOT LOGGED IN
+                            2: EMPTY CONTENTS
+                    */
+                   let $toastContent;
+                   console.log(postStatus.error);
+                   switch(postStatus.error) {
+                       case 1:
+                       
+                   }
+                }
+            }
+        );
+    };
 }
 
 Home.propTypes = {
