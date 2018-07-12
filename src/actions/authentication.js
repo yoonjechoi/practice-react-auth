@@ -167,8 +167,11 @@ export function logout() {
 
 export function logoutRequest() {
     return (dispatch) => {
-
-        const authData = localStorage.getItem('auth').access
+        dispatch(logout());
+        
+        let authData = localStorage.getItem('auth');
+            authData = JSON.parse(atob(authData));
+        
         const data = {
             client_id: "AbATJX3V319a2Jd09BWfPTj7wiUAZTNX6DEGZROW",
             client_secret: "9QtVJ6CcKb8zi4TfObBxWoy79ewobNwOFqZ1nKVuNSba6wyAIIK3epaqJNJ3N4ljD6Pg9jvcWevA58EkSKRH1TN7gZqzmejc3KXW2Do7z4JV103XdXDHgQf8Z2YSfDrT",

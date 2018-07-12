@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { getStatusRequest, logoutRequest } from '../actions/authentication';
+
+import Materialize from 'materialize-css';
 
 class Header extends Component {
     componentDidMount() {
@@ -21,12 +22,11 @@ class Header extends Component {
 
     }
     render() {
-
         let re = /(login|register)/;
         let isAuth = re.test(this.props.location.pathname);
-        console.log('isAuth=', isAuth);
+
         if (isAuth) {
-            return (<div></div>);
+            return (null);
         }
 
         const loginButton = (
@@ -61,6 +61,15 @@ class Header extends Component {
             </div>
         );
     }
+
+    handleLogout = () => {
+        return this.props.logoutRequest().then(
+            () => {
+                Materialize.toast('Good Bye', 2000);
+                
+            }
+        );
+    };
 }
 
 
