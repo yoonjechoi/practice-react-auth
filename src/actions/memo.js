@@ -5,6 +5,15 @@ import {
     MEMO_LIST,
     MEMO_LIST_SUCCESS,
     MEMO_LIST_FAILURE,
+    MEMO_EDIT,
+    MEMO_EDIT_SUCCESS,
+    MEMO_EDIT_FAILURE,
+    MEMO_REMOVE,
+    MEMO_REMOVE_SUCCESS,
+    MEMO_REMOVE_FAILURE,
+    MEMO_STAR,
+    MEMO_STAR_SUCCESS,
+    MEMO_STAR_FAILURE
 } from './ActionTypes';
 
 import axios from 'axios';
@@ -81,15 +90,15 @@ export function memoListRequest(isInitial, listType, id, username) {
     return (dispatch) => {
         dispatch(memoList());
 
-        let url = "/api/memo";
+        let url = "http://localhost:8000/api/memo";
 
         if (typeof username === "undefined") {
             // username not given, load public memo
-            url = isInitial ? url : `${url}/${listType}/${id}`;
+            url = isInitial ? url : `${url}/?${listType}=${id}`;
             // or url + '/' + listType + Z'/' +  id
         } else {
             // load memos of a user
-            url = isInitial ? `${url}/${username}` : `${url}/${username}/${listType}/${id}`;
+            url = isInitial ? `${url}/${username}` : `${url}/${username}/?${listType}=${id}`;
         }
 
         return axios.get(url)
