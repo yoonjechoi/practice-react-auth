@@ -2,29 +2,20 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getStatusRequest, logoutRequest } from '../actions/authentication';
+import { Header } from '../components';
 
 class App extends Component {
     render() {
+
+
         return (
             <div>
+
+
             </div>
         );
     }
-
-
-    componentDidMount() {
-
-        if ( !('auth' in localStorage) ) {
-            return;
-        }
-
-        this.props.getStatusRequest().then(()=> {
-            // TODO
-            
-        });
-
-
-    }
+    
 }
 
 const mapStateToProps = (state) => {
@@ -36,9 +27,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getStatusRequest: () => {
-            return dispatch(getStatusRequest());
-        },
+
         logoutRequest: () => {
             return dispatch(logoutRequest());
         }

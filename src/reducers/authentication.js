@@ -68,6 +68,26 @@ export default function authentication(state = initialState, action) {
                 }
             });
 
+        case types.AUTH_GET_STATUS:
+            return state;
+
+        case types.AUTH_GET_STATUS_SUCCESS:
+            return update(state, {
+                status: {
+                    isLoggedIn: { $set: true },
+                    valid: { $set: true },
+                    currenctUser: { $set: action.username }
+                }
+            });
+
+        case types.AUTH_GET_STATUS_FAILURE:
+            return update(state, {
+                status: {
+                    valid: { $set: false },
+                    isLoggedIn: { $set: false }
+                }
+            });
+
         default:
             return state
     }
