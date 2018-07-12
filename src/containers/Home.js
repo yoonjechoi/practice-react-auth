@@ -17,6 +17,11 @@ class Home extends Component {
         };
     }
 
+    componentDidMount() {
+        const { memoListRequest } = this.props;
+        memoListRequest(true, undefined, undefined, this.props.username)
+    }
+
     render() {
         const emptyView = (
             <div className="container">
@@ -70,12 +75,12 @@ class Home extends Component {
                             1: NOT LOGGED IN
                             2: EMPTY CONTENTS
                     */
-                   let $toastContent;
-                   console.log(postStatus.error);
-                   switch(postStatus.error) {
-                       case 1:
-                       
-                   }
+                    let $toastContent;
+                    console.log(postStatus.error);
+                    switch (postStatus.error) {
+                        case 1:
+
+                    }
                 }
             }
         );

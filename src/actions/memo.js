@@ -92,17 +92,19 @@ export function memoListRequest(isInitial, listType, id, username) {
 
         let url = "http://localhost:8000/api/memo";
 
-        if (typeof username === "undefined") {
-            // username not given, load public memo
-            url = isInitial ? url : `${url}/?${listType}=${id}`;
-            // or url + '/' + listType + Z'/' +  id
-        } else {
-            // load memos of a user
-            url = isInitial ? `${url}/${username}` : `${url}/${username}/?${listType}=${id}`;
+        if (typeof username !== "undefined") {
+            url = `${url}/${username}/`;
         }
 
+        if (!isInitial) {
+            url = `${url}?${listType}=${id}`;
+        }
+        
+        console.log(url);
+        
         return axios.get(url)
             .then((response) => {
+                console.log(response.data);
                 dispatch(memoListSuccess(response.data, isInitial, listType));
             }).catch((error) => {
                 dispatch(memoListFailure(error.response.data))
